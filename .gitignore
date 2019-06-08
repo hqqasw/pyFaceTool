@@ -1,0 +1,5 @@
+*.pyc
+model/*
+data/*
+test.py
+test_lfw.py
