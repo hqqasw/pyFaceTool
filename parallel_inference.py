@@ -44,8 +44,11 @@ def worker_func(model_cls, model_kwargs, checkpoint, dataset, data_func,
             data_func(data),
             thresholds=[0.5, 0.6, 0.8],
             nms_thresholds=[0.7, 0.7, 0.6])
-        feats = model.easy_extract_features(
-            data_func(data), landmarks)
+        if bboxes.shape[0] > 0:
+            feats = model.easy_extract_features(
+                data_func(data), landmarks)
+        else:
+            feats = None
         ret = (bboxes, landmarks, feats)
         result_queue.put((img_id, ret))
 
